@@ -1,0 +1,91 @@
+#version: "3"
+
+services:
+  selenium-hub:
+    image: selenium/hub:4.21.0
+    container_name: selenium-hub
+    environment:
+      - SE_LOG_LEVEL=FINE
+    ports:
+      - "4444:4444"
+      - "4442:4442"
+      - "4443:4443"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s --fail http://127.0.0.1:4444/status | grep 'ready' || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+    networks:
+      - projectx-net
+
+  chrome:
+    image: selenium/node-chrome:126.0
+    shm_size: 1g
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+      - SE_NODE_MAX_SESSIONS=1
+      - SE_NODE_SESSION_TIMEOUT=60
+      - SE_VNC_ENABLED=true
+    ports:
+      - "5555:5555"
+      - "5900:5900"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -s --fail http://localhost:5555/status || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    networks:
+      - projectx-net
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    container_name: projectx-app
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "-L", "http://localhost:8080"] # Use -L to follow redirects
+      interval: 10s
+      timeout: 10s
+      retries: 15
+      start_period: 60s
+    networks:
+      - projectx-net
+
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    container_name: projectx-tests
+    ports:
+      - "5901:5900"
+    depends_on:
+      app:
+        condition: service_healthy
+      selenium-hub:
+        condition: service_healthy
+      chrome:
+        condition: service_healthy
+    networks:
+      - projectx-net
+    volumes:
+      - ./allure-results:/app/target/allure-results   # this maps container’s /tests/target to host ./target
+    environment:
+      - HUB_HOST=selenium-hub
+      - execution=docker
+      - baseUrl=http://app:8080/login
+      - JAVA_OPTS=-Dwebdriver.remote.debug=true -Dwebdriver.chrome.args=--ignore-certificate-errors --allow-insecure-localhost
+    entrypoint: >
+      sh -c "tail -f /dev/null"     #Keep container running for manual testing or debugging specific scenario and generate allure report
+#      sh -c "sleep 30 && mvn clean test -Dexecution=docker -DbaseUrl=http://app:8080"   # industry standard for CI/CD
+
+
+networks:
+  projectx-net:
+    driver: bridge
+    name: projectx-net # Explicitly set network name

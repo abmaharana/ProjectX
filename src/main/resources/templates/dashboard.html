@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header>
+    <h1>Welcome to the Dashboard</h1>
+</header>
+
+<main>
+    <p>Hello, <span th:text="${username}">User</span>!</p>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</main>
+
+<footer>
+    <p>&copy; 2025 My Application</p>
+</footer>
+</body>
+</html>

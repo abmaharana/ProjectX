@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automation Test Suite" verbose="1" parallel="tests" thread-count="2">
+
+    <!-- QA Environment -->
+    <parameter name="environment" value="qa" />
+
+    <test name="UI Automation Tests">
+        <classes>
+            <class name="com.example.tests.runners.TestNGCucumberRunnerTest" />
+        </classes>
+    </test>
+
+    <!-- You can add another <test> block for API tests or other modules -->
+    <!--
+    <test name="API Automation Tests">
+        <classes>
+            <class name="com.example.tests.runners.APITestRunner" />
+        </classes>
+    </test>
+    -->
+
+</suite>

@@ -1,0 +1,29 @@
+FROM maven:3.9.6-eclipse-temurin-17
+
+WORKDIR /tests
+
+# Install curl and ping
+RUN apt-get update && apt-get install -y curl iputils-ping
+
+# Copy and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+
+# Build the project without running tests
+RUN mvn clean install -DskipTests
+
+# Install dependencies
+RUN apt-get update && apt-get install -y wget unzip openjdk-11-jdk
+
+# Install Allure CLI
+RUN wget https://github.com/allure-framework/allure2/releases/download/2.30.0/allure-2.30.0.tgz \
+    && tar -zxvf allure-2.30.0.tgz \
+    && mv allure-2.30.0 /opt/allure \
+    && ln -s /opt/allure/bin/allure /usr/bin/allure
+
+# Run tests using Maven; baseUrl is passed as an environment variable
+CMD ["bash", "-c", "mvn test -DbaseUrl=${baseUrl} -Dallure.results.directory=/app/target/allure-results -e -X && \
+     allure generate /app/target/allure-results -o /app/target/allure-report --clean"]
