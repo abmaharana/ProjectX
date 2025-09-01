@@ -158,7 +158,7 @@
                             <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
                             <inputDirectory>${project.build.directory}</inputDirectory>
                             <jsonFiles>
-                                <param>**/*.json</param>
+                                <param>cucumber.json</param>
                             </jsonFiles>
 <!--                            <buildNumber>1</buildNumber>-->
                             <checkBuildResult>false</checkBuildResult> <!-- Prevents failure if tests fail -->
