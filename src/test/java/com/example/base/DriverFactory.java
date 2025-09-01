@@ -26,7 +26,7 @@ public class DriverFactory {
 
             if (executionEnv.equalsIgnoreCase("docker")) {
                 try {
-//                    options.addArguments("--headless");
+                    options.addArguments("--headless-new");
                     options.addArguments("--disable-dev-shm-usage");
                     options.addArguments("--no-sandbox");
                     options.addArguments("--remote-allow-origins=*");
