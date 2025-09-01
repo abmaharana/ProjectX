@@ -149,14 +149,14 @@
                 <executions>
                     <execution>
                         <id>cucumber-report</id>
-                        <phase>test</phase>
+                        <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
                             <projectName>Automation Framework</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-report-html</outputDirectory>
-                            <inputDirectory>${project.build.directory}</inputDirectory>
+                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
+                            <inputDirectory>${project.build.directory}/cucumber-reports</inputDirectory>
                             <jsonFiles>
                                 <param>cucumber.json</param>
                             </jsonFiles>
