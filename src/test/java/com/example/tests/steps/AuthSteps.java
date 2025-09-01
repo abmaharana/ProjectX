@@ -65,8 +65,8 @@ public class AuthSteps {
 
     @Then("I should see the dashboard with username {string}")
     public void iShouldSeeTheDashboard(String expectedUser) {
-        logger.info("Username text verified: " + dashboardPage.getWelcomeText());
-        Assert.assertTrue(dashboardPage.getWelcomeText().contains(expectedUser));
+        logger.info("Username text verified: " + dashboardPage.getWelcomeText(expectedUser));
+        Assert.assertTrue(dashboardPage.getWelcomeText(expectedUser).contains(expectedUser));
         driver.quit();
     }
 
