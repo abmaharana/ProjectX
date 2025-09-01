@@ -6,8 +6,8 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
         features = "src/test/resources/features",
         glue = {"com.example.tests.steps"},
-        plugin= {"pretty", "json:target/cucumber.json",
-                "json:target/cucumber-reports/cucumber.runtime.formatter.JSONFormatter"},
+        plugin= {"pretty", "json:target/cucumber-reports/cucumber.json"},
+                //"json:target/cucumber-reports/cucumber.runtime.formatter.JSONFormatter"},
         tags = "@smoke",
         monochrome = true
 )
