@@ -28,8 +28,27 @@ public class DashboardPage extends BasePage {
     }
 
     public String getWelcomeText(String username) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeHeader(username)));
-        return welcomeHeader.getText();
+         // Debug: Check if element exists in DOM
+        List<WebElement> elements = driver.findElements(welcomeHeader(username));
+        if (elements.isEmpty()) {
+            System.out.println("Element not found in DOM for username: " + username);
+        } else {
+            System.out.println("Element found but may not be visible.");
+        }
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
+            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(welcomeHeader(username)));
+            return element.getText();
+        }catch (TimeoutException e) {
+            // Take screenshot
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(screenshot, new File("screenshot-failure-" + System.currentTimeMillis() + ".png"));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            throw e; // Rethrow to fail the test
+        }
     }
+    
 }
