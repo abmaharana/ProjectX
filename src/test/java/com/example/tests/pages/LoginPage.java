@@ -12,7 +12,7 @@ public class LoginPage extends BasePage {
     @FindBy(name = "password")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//button[text()='Login1']")
+    @FindBy(xpath = "//button[text()='Login']")
     private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
