@@ -9,10 +9,10 @@ import java.time.Duration;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(name = "username")
+    @FindBy(xpath = "//input[@name='username']")
     private WebElement usernameInput;
 
-    @FindBy(name = "password")
+    @FindBy(xpath = "//input[@name='password']")
     private WebElement passwordInput;
 
     @FindBy(xpath = "//button[text()='Login']")
