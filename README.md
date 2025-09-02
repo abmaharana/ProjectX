@@ -30,6 +30,7 @@ docker ps -a
 ## Run Tests Manually in docker VM: 
 entrypoint >
   sh -c "tail -f /dev/null"
+  
 docker exec projectx-tests sh -c "mvn clean test -Dexecution=docker -DbaseUrl=http://app:8080"
 
 
