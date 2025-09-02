@@ -28,14 +28,19 @@ public class LoginPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         usernameInput.clear();
         Thread.sleep(5000);
-        usernameInput.sendKeys(username);
+        // usernameInput.sendKeys(username);
+        WebElement usernameInput = driver.findElement(By.xpath("//input[@name='username']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value = arguments[1];", usernameInput, username);
         System.out.println("=== Entered username ===");
     }
 
     public void enterPassword(String password) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
-        wait.until(ExpectedConditions.visibilityOf(passwordInput));
-        passwordInput.sendKeys(password);
+          passwordInput.clear();
+//        passwordInput.sendKeys(password);
+        WebElement passwordInput = driver.findElement(By.xpath("//input[@name='password']"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].value = arguments[1];", passwordInput, password);
         System.out.println("=== Entered password ===");
     }
 
