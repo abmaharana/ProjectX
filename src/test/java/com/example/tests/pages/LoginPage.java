@@ -36,6 +36,7 @@ public class LoginPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
         wait.until(ExpectedConditions.visibilityOf(passwordInput));
         passwordInput.sendKeys(password);
+        System.out.println("=== Entered password ===");
     }
 
     public void clickLogin() {
