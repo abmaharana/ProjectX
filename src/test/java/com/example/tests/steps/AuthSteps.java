@@ -55,7 +55,7 @@ public class AuthSteps {
     }
 
     @And("I login with username {string} and password {string}")
-    public void iLogin(String username, String password) {
+    public void iLogin(String username, String password) throws InterruptedException {
         loginPage.enterUsername(username);
         loginPage.enterPassword(password);
         loginPage.clickLogin();
