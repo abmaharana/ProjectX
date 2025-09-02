@@ -25,14 +25,14 @@ public class LoginPage extends BasePage {
     public void enterUsername(String username) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
-        usernameInput.clear();
+        //usernameInput.clear();
         usernameInput.sendKeys(username);
     }
 
     public void enterPassword(String password) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
         wait.until(ExpectedConditions.visibilityOf(passwordInput));
-        passwordInput.clear();
+        //passwordInput.clear();
         passwordInput.sendKeys(password);
     }
 
