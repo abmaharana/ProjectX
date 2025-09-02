@@ -27,7 +27,6 @@ public class AuthSteps {
     public void iOpenTheBrowser() throws MalformedURLException {
         driver = DriverFactory.getDriver();
         driver.get(Config.getBaseUrl());
-//        driver.get(System.getProperty("baseUrl","http://app:8080/login"));
         logger.info("Browser opened");
     }
 
