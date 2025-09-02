@@ -18,6 +18,7 @@ services:
     networks:
       - projectx-net
 
+
   chrome:
     image: selenium/node-chrome:126.0
     shm_size: 1g
@@ -41,6 +42,7 @@ services:
     networks:
       - projectx-net
 
+
   app:
     build:
       context: .
@@ -56,6 +58,7 @@ services:
       start_period: 60s
     networks:
       - projectx-net
+
 
   tests:
     build:
@@ -74,17 +77,17 @@ services:
     networks:
       - projectx-net
     volumes:
-      - ./allure-results:/app/target/allure-results   # this maps container’s /tests/target to host ./target
+      - ./target/cucumber-reports:/tests/target/cucumber-reports   # this maps container’s /tests/target/cucumber-reports to host ./target/cucuumber-reports
     environment:
       - HUB_HOST=selenium-hub
       - execution=docker
       - baseUrl=http://app:8080/login
       - JAVA_OPTS=-Dwebdriver.remote.debug=true -Dwebdriver.chrome.args=--ignore-certificate-errors --allow-insecure-localhost
     entrypoint: >
-      sh -c "tail -f /dev/null"     #Keep container running for manual testing or debugging specific scenario and generate allure report
-#      sh -c "sleep 30 && mvn clean test -Dexecution=docker -DbaseUrl=http://app:8080"   # industry standard for CI/CD
+      sh -c "sleep 30 && mvn verify -Dexecution=docker -DbaseUrl=http://app:8080"   # industry standard for CI/CD
+#      sh -c "tail -f /dev/null"     #Keep container running for manual testing or debugging specific scenario and generate allure report
 
-
+      
 networks:
   projectx-net:
     driver: bridge
