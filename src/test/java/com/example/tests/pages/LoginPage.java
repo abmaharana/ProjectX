@@ -22,10 +22,11 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void enterUsername(String username) {
+    public void enterUsername(String username) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         //usernameInput.clear();
+        Thread.sleep(2000);
         usernameInput.sendKeys(username);
     }
 
