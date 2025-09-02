@@ -40,6 +40,7 @@ public class DriverFactory {
                     throw e;
                 }
             } else {
+                options.addArguments("--headless=new");
                 driver = new ChromeDriver(options);
             }
 
