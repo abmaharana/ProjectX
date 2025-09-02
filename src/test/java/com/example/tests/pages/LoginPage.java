@@ -27,7 +27,7 @@ public class LoginPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30), Duration.ofMillis(200));
         wait.until(ExpectedConditions.visibilityOf(usernameInput));
         //usernameInput.clear();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         usernameInput.sendKeys(username);
         System.out.println("=== Entered username ===");
     }
