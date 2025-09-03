@@ -24,10 +24,11 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    
     public void enterUsername(String username) {
         System.out.println("=== Inside Login page ===");
         WebElement usernameInput = driver.findElement(By.xpath("//input[@name='username']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         usernameInput.clear();
         js.executeScript("arguments[0].value = arguments[1];", usernameInput, username);
         System.out.println("=== Entered username ===");
@@ -35,13 +36,14 @@ public class LoginPage extends BasePage {
 
     public void enterPassword(String password) {
         WebElement passwordInput = driver.findElement(By.xpath("//input[@name='password']"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         passwordInput.clear();
         js.executeScript("arguments[0].value = arguments[1];", passwordInput, password);
         System.out.println("=== Entered password ===");
     }
 
     public void clickLogin() {
-        loginButton.click();
+        WebElement button = driver.findElement(By.xpath("//button[text()='Login']"));
+        js.executeScript("arguments[0].click();", button);
+        System.out.println("=== Login button clicked ===");
     }
 }
