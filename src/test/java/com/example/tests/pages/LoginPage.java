@@ -11,14 +11,14 @@ import org.openqa.selenium.By;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(xpath = "//input[@name='username']")
-    private WebElement usernameInput;
+    // @FindBy(xpath = "//input[@name='username']")
+    // private WebElement usernameInput;
 
-    @FindBy(xpath = "//input[@name='password']")
-    private WebElement passwordInput;
+    // @FindBy(xpath = "//input[@name='password']")
+    // private WebElement passwordInput;
 
-    @FindBy(xpath = "//button[text()='Login']")
-    private WebElement loginButton;
+    // @FindBy(xpath = "//button[text()='Login']")
+    // private WebElement loginButton;
 
     public LoginPage(WebDriver driver) {
         super(driver);
