@@ -18,6 +18,9 @@ public class SignupPage extends BasePage {
     @FindBy(xpath="//button[text()='Create Account']")
     private WebElement signupButton;
 
+    @FindBy(xpath = "//p[text()='Have an accounts? ']")
+    private WebElement haveAccountLink;
+
     public SignupPage(WebDriver driver) {
         super(driver);
     }
@@ -39,5 +42,9 @@ public class SignupPage extends BasePage {
 
     public void clickSignup() {
         signupButton.click();
+    }
+
+    public boolean verifyHaveAccountLink() {
+        return haveAccountLink.isDisplayed();
     }
 }
