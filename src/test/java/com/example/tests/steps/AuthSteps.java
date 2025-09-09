@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import java.net.MalformedURLException;
+import org.testng.annotations.AfterTest;
 
 public class AuthSteps {
 
@@ -34,6 +35,7 @@ public class AuthSteps {
         driver.get(Config.getBaseUrl() + "/signup");
         signupPage = new SignupPage(driver);
         logger.info("Signup page opened");
+        Assert.assertTrue(signupPage.verifyHaveAccountLink());
     }
 
     @And("I sign up with username {string} and password {string}")
@@ -68,7 +70,7 @@ public class AuthSteps {
         driver.quit();
     }
 
-    @After
+    @AfterTest
     public void tearDown() {
         if (driver != null) {
             DriverFactory.quitDriver();
