@@ -5,9 +5,10 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
         features = "src/test/resources/features",
-        glue = {"com.example.tests.steps"},
-        plugin= {"pretty", "json:target/cucumber-reports/cucumber.json"},
-                //"json:target/cucumber-reports/cucumber.runtime.formatter.JSONFormatter"},
+        glue = {"com.example.tests.steps","com.example.base"},
+        plugin= {"pretty",
+                "json:target/cucumber-reports/cucumber.json",
+                "html:target/cucumber-reports/cucumber-html-report"},
         tags = "@smoke",
         monochrome = true
 )
