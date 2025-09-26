@@ -1,6 +1,6 @@
 package programming.singleton;
 
-public class singleton {
+public class Singleton {
     private static Singleton s;
     private Singleton(){
 
