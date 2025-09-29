@@ -3,8 +3,8 @@
 ## Build
 mvn -B clean package
 
-## Run locally (jar)
-java -jar target/my-app-1.0.0.jar
+## Run App
+mvn spring-boot:run
 
 ## Run all tests
 mvn test 
